@@ -1,7 +1,7 @@
 package common;
 
-import java.awt.Image;
-import javax.swing.ImageIcon;
+import java.awt.*;
+import javax.swing.*;
 
 public class ImageChange {
 
