@@ -34,7 +34,7 @@ public class Server implements Runnable {
   // 접속을 받는다
   ServerSocket ss;
   // 클라이언트 => 서버 => 연결선 (숫자 => PORT)
-  final int PORT = 3355;
+  final int PORT = 4000;
 
   // port => 0~65535
   // 0~1023 알려진 포트 => 80 : HTTP
@@ -52,7 +52,7 @@ public class Server implements Runnable {
 	  // new ServerSocket(1000,PORT)
 	  System.out.println("Server Start...");
 	} catch (Exception ex) {
-	  ex.printStackTrace();
+	  throw new RuntimeException(ex);
 	}
   }
 
@@ -68,6 +68,7 @@ public class Server implements Runnable {
 		Client client = new Client(s);
 		client.start();
 	  } catch (Exception ex) {
+		throw new RuntimeException(ex);
 	  }
 	}
   }
@@ -84,7 +85,7 @@ public class Server implements Runnable {
   class Client extends Thread {
 
 	// Client의 모든 정보
-	String id, name, sex;
+	String id, nickname, gender;
 	// Client 연결
 	Socket s;
 	// 송수신
@@ -113,6 +114,7 @@ public class Server implements Runnable {
 		// ------------        => setCharacterEncoding("UTF-8")
 		// %EC%9E%90%EB%B0%94 ==> 자바
 	  } catch (Exception ex) {
+		throw new RuntimeException(ex);
 	  }
 
 	}
@@ -131,15 +133,15 @@ public class Server implements Runnable {
 			// 로그인 요청시 처리
 			case Function.LOGIN: {
 			  id = st.nextToken();
-			  name = st.nextToken();
-			  sex = st.nextToken();
+			  nickname = st.nextToken();
+			  gender = st.nextToken();
 
 			  // 1. 전체적으로 로그인 정보 전송
 			  messageAll(Function.LOGIN + "|"
-				  + id + "|" + name + "|" + sex);
+				  + id + "|" + nickname + "|" + gender);
 			  // 2. 입장메세지 전송
 			  messageAll(Function.WAITCHAT + "|[알림]"
-				  + name + "님이 입장하셨습니다");
+				  + nickname + "님이 입장하셨습니다");
 			  // 3. waitVc에 저장
 			  waitVc.add(this);
 			  // => 메인화면으로 이동
@@ -149,8 +151,8 @@ public class Server implements Runnable {
 			  for (Client client : waitVc) {
 				messageTo(Function.LOGIN + "|"
 					+ client.id + "|"
-					+ client.name + "|"
-					+ client.sex);
+					+ client.nickname + "|"
+					+ client.gender);
 			  }
 			  // 5. 방정보 전송
 			}
@@ -158,6 +160,7 @@ public class Server implements Runnable {
 		  }
 		}
 	  } catch (Exception ex) {
+		throw new RuntimeException(ex);
 	  }
 	}
 
@@ -171,6 +174,7 @@ public class Server implements Runnable {
 	  try {
 		out.write((msg + "\n").getBytes());
 	  } catch (Exception ex) {
+		throw new RuntimeException(ex);
 	  }
 	}
 
@@ -181,6 +185,7 @@ public class Server implements Runnable {
 		  client.messageTo(msg);
 		}
 	  } catch (Exception ex) {
+		throw new RuntimeException(ex);
 	  }
 	}
   }
