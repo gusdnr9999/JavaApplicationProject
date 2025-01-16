@@ -6,8 +6,14 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="C:/JavaDev/lombok-1.18.36.jar"/>
+	<classpathentry kind="lib" path="C:/oracleDev/ojdbc8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sist-116/Downloads/JTattoo-1.6.13.jar"/>
+=======
 	<classpathentry kind="lib" path="C:/oracleDev/ojdbc8.jar"/>
 	<classpathentry kind="lib" path="C:/javaDev/lombok-1.18.36.jar"/>
 	<classpathentry kind="lib" path="C:/javaDev/JTattoo-1.6.13.jar"/>
+>>>>>>> branch 'master' of https://github.com/gusdnr9999/JavaApplicationProject.git
 	<classpathentry kind="output" path="bin"/>
 </classpath>
