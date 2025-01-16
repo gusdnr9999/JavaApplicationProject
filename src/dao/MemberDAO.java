@@ -24,7 +24,7 @@ public class MemberDAO {
 
   public Connection getConnection() {
 	try {
-	  conn = DriverManager.getConnection(URL, "cl0ud", "131217");
+	  conn = DriverManager.getConnection(URL, "hr", "happy");
 	} catch (Exception ex) {
 	  ex.printStackTrace();
 	}
