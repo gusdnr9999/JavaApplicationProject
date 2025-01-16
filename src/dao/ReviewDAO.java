@@ -14,7 +14,7 @@ public class ReviewDAO {
 	private final int REVIEWROW=10;
 	
 	public static ReviewDAO newInstance()
-	{
+	{ 
 		if(rDao==null)
 			rDao= new ReviewDAO();
 		return rDao;
