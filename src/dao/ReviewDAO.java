@@ -16,7 +16,7 @@ public class ReviewDAO {
 	public static ReviewDAO newInstance()
 	{ 
 		if(rDao==null)
-			rDao= new ReviewDAO();
+			rDao= new ReviewDAO(); 
 		return rDao;
 	}	
 	
