@@ -14,7 +14,7 @@ PROFILE          VARCHAR2(4000)
 import java.util.*;
 import lombok.Data;
 @Data
-public class Review {
+public class ReviewVO {
 	private int 	rno,no,star,up,down;
 	private String 	id,content,profile;
 	private Date	regdate; 

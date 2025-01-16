@@ -15,7 +15,7 @@ SERIAL           VARCHAR2(500)
 ISCP             CHAR(1)  
  */
 @Data
-public class Novel {
+public class NovelVO {
 	private int 	no;
 	private double	avgstar;
 	private String 	genre,title,poster,author,story,serial,iscp;
