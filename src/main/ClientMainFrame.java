@@ -106,14 +106,14 @@ public class ClientMainFrame extends JFrame
 	} else if (e.getSource() == login.b1) {
 	  // 유효성 검사
 	  String id = login.tf.getText();
-	  if (id.trim().length() < 1) {
+	  if (id.trim().isEmpty()) {
 		JOptionPane.showMessageDialog(this,
 			"아이디를 입력하세요");
 		login.tf.requestFocus();
 		return;
 	  }
 	  String pwd = String.valueOf(login.pf.getPassword());
-	  if (pwd.trim().length() < 1) {
+	  if (pwd.trim().isEmpty()) {
 		JOptionPane.showMessageDialog(this,
 			"비밀번호를 입력하세요");
 		login.pf.requestFocus();
@@ -121,13 +121,13 @@ public class ClientMainFrame extends JFrame
 	  }
 	  // 로그인 검색
 	  MemberVO vo = mDao.isLogin(id, pwd);
-	  if (vo.getMsg().equals("NOID")) {
+	  if (vo.getMsg().equals("NO ID")) {
 		JOptionPane.showMessageDialog(this,
 			"아이디가 존재하지 않습니다");
 		login.tf.setText("");
 		login.pf.setText("");
 		login.tf.requestFocus();
-	  } else if (vo.getMsg().equals("NOPWD")) {
+	  } else if (vo.getMsg().equals("NO PWD")) {
 		JOptionPane.showMessageDialog(this,
 			"비밀번호가 틀립니다");
 		login.pf.setText("");
@@ -145,7 +145,7 @@ public class ClientMainFrame extends JFrame
 
   public void connection(MemberVO vo) {
 	try {
-	  s = new Socket("localhost", 3355);
+	  s = new Socket("localhost", 4000);
 	  // 서버 연결 => s는 서버
 	  // 서버로 전송
 	  out = s.getOutputStream();
@@ -157,7 +157,7 @@ public class ClientMainFrame extends JFrame
 	  out.write((Function.LOGIN + "|"
 		  + vo.getId() + "|"
 		  + vo.getName() + "|"
-		  + vo.getSex() + "\n").getBytes());
+		  + vo.getGender() + "\n").getBytes());
 	  // => 반드시 => \n을 전송해야 된다
 	} catch (Exception ex) {
 	  throw new RuntimeException(ex);

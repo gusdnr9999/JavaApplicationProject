@@ -1,14 +1,14 @@
 package dao;
 
 import java.sql.*;
-import vo.*;
+import vo.MemberVO;
 
 public class MemberDAO {
 
   private Connection conn;
   private PreparedStatement ps;
   private static MemberDAO dao;
-  private final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
+  private final String URL = "jdbc:oracle:thin:@211.238.142.124:1521:XE";
 
   private MemberDAO() {
 	try {
@@ -19,19 +19,21 @@ public class MemberDAO {
   }
 
   public static MemberDAO newInstance() {
+	if (dao == null) {
+	  dao = new MemberDAO();
+	}
 	return new MemberDAO();
   }
 
-  public Connection getConnection() {
+  public void getConnection() {
 	try {
-	  conn = DriverManager.getConnection(URL, "hr", "happy");
+	  conn = DriverManager.getConnection(URL, "hr_4", "happy");
 	} catch (Exception ex) {
-	  ex.printStackTrace();
+	  throw new RuntimeException(ex);
 	}
-	return conn;
   }
 
-  public void disConnection() {
+  public void disConnection(Connection conn, PreparedStatement ps) {
 	try {
 	  if (ps != null) {
 		ps.close();
@@ -53,14 +55,17 @@ public class MemberDAO {
 		  + "WHERE id=?";
 	  ps = conn.prepareStatement(sql);
 	  ps.setString(1, id);
+
 	  ResultSet rs = ps.executeQuery();
 	  rs.next();
 	  int cnt = rs.getInt(1);
+	  System.out.println(cnt);
 	  rs.close();
+
 	  if (cnt == 0) {
 		vo.setMsg("NO ID");
 	  } else {
-		sql = "SELECT id, pwd, name, sex "
+		sql = "SELECT id, nickname, pw, name, gender "
 			+ "FROM member "
 			+ "WHERE id=?";
 		ps = conn.prepareStatement(sql);
@@ -68,20 +73,21 @@ public class MemberDAO {
 		rs = ps.executeQuery();
 		rs.next();
 		vo.setId(rs.getString(1));
-		vo.setName(rs.getString(3));
-		vo.setSex(rs.getString(4));
+		vo.setNickname(rs.getString(2));
+		vo.setName(rs.getString(4));
+		vo.setGender(rs.getString(5));
 
-		String db_pwd = rs.getString(2);
+		String db_pwd = rs.getString(3);
 		if (db_pwd.equals(pwd)) {
 		  vo.setMsg("OK");
 		} else {
-		  vo.setMsg("NOPWD");
+		  vo.setMsg("NO PWD");
 		}
 	  }
 	} catch (Exception ex) {
-	  ex.printStackTrace();
+	  throw new RuntimeException(ex);
 	} finally {
-	  disConnection();
+	  disConnection(conn, ps);
 	}
 	return vo;
   }
