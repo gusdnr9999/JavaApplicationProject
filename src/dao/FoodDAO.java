@@ -9,9 +9,9 @@ public class FoodDAO {
   private Connection conn;
   private PreparedStatement ps;
   private static FoodDAO dao;
-  private final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
+  private final String URL = "jdbc:oracle:thin:@211.238.142.124:1521:XE";
 
-  //                                          211.238.142.124
+  //                                          
   // 1. 드라이버 등록
   public FoodDAO() {
 	try {
