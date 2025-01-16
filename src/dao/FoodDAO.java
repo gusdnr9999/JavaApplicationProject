@@ -34,7 +34,7 @@ public class FoodDAO {
   // 3. 연결
   public void getConnection() {
 	try {
-	  conn = DriverManager.getConnection(URL, "cl0ud", "131217");
+	  conn = DriverManager.getConnection(URL, "hr", "happy");
 	} catch (Exception ex) {
 	}
   }
