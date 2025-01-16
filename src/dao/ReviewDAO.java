@@ -10,14 +10,14 @@ public class ReviewDAO {
 	private Connection conn;
 	private PreparedStatement ps;
 	DataBase db=new DataBase();
-	private static ReviewDAO nDao;
+	private static ReviewDAO rDao;
 	private final int REVIEWROW=10;
 	
 	public static ReviewDAO newInstance()
 	{
-		if(nDao==null)
-			nDao= new ReviewDAO();
-		return nDao;
+		if(rDao==null)
+			rDao= new ReviewDAO();
+		return rDao;
 	}	
 	
 	//전체목록 출력
