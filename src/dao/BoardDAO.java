@@ -5,7 +5,7 @@ import vo.BoardVO;
 public class BoardDAO {
 		private Connection conn;
 	   private PreparedStatement ps;
-	   private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
+	   private final String URL="jdbc:oracle:thin:@211.238.142.124:1521:XE";
 
 	   private static BoardDAO dao;
 	   
@@ -20,7 +20,7 @@ public class BoardDAO {
 	   {
 		   try
 		   {
-			   conn=DriverManager.getConnection(URL,"hr","happy");
+			   conn=DriverManager.getConnection(URL,"hr_4","happy");
 			   // conn hr/happy
 		   }catch(Exception ex)
 		   {
