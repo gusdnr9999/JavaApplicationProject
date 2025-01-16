@@ -15,7 +15,8 @@ import java.util.*;
 import lombok.Data;
 @Data
 public class ReviewVO {
-	private int 	rno,no,star,up,down;
+	private int 	rno,no,up,down;
+	private double 	star;
 	private String 	id,content,profile;
 	private Date	regdate; 
 }

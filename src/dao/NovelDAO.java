@@ -68,6 +68,12 @@ public class NovelDAO {
 		try
 		{
 			db.getConnection();
+			String sql="SELECT CEIL(COUNT(*)/?) FROM novel";
+			ps=conn.prepareStatement(sql);
+			ps.setDouble(1, NOVELROW);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			count=rs.getInt(1);
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
