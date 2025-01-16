@@ -2,25 +2,25 @@ package dao;
 import java.sql.*;
 import java.util.*;
 import vo.*;
-public class NovelDAO2 {
+public class NovelDAO {
 
 	private Connection conn;
 	private PreparedStatement ps;
 	DataBase db=new DataBase();
-	private static NovelDAO2 nDao;
+	private static NovelDAO nDao;
 	private final int NOVELROW=12;
 	
-	public static NovelDAO2 newInstance()
+	public static NovelDAO newInstance()
 	{
 		if(nDao==null)
-			nDao= new NovelDAO2();
+			nDao= new NovelDAO();
 		return nDao;
 	}	
 	
 	//전체목록 출력
-	public List<NovelVO2> novelListData(int page)
+	public List<NovelVO> novelListData(int page)
 	{
-		List<NovelVO2> list=new ArrayList<NovelVO2>();
+		List<NovelVO> list=new ArrayList<NovelVO>();
 		try
 		{
 			db.getConnection();
@@ -37,7 +37,7 @@ public class NovelDAO2 {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 			{
-				NovelVO2 vo=new NovelVO2();
+				NovelVO vo=new NovelVO();
 				vo.setNo(rs.getInt(1));
 				vo.setGenre(rs.getString(2));
 				vo.setTitle(rs.getString(3));

@@ -5,18 +5,18 @@ import java.util.*;
 
 import vo.ReviewVO;
 
-public class ReviewDAO2 {
+public class ReviewDAO {
  
 	private Connection conn;
 	private PreparedStatement ps;
 	DataBase db=new DataBase();
-	private static ReviewDAO2 rDao;
+	private static ReviewDAO rDao;
 	private final int REVIEWROW=10;
 	
-	public static ReviewDAO2 newInstance()
+	public static ReviewDAO newInstance()
 	{ 
 		if(rDao==null)
-			rDao= new ReviewDAO2();
+			rDao= new ReviewDAO();
 		return rDao;
 	}	
 	
