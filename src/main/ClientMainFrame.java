@@ -41,14 +41,20 @@ public class ClientMainFrame extends JFrame
 	cp.setBounds(10, 75, 820, 570);
 	add(cp);
 	setSize(850, 700);
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 	// 등록
 	// 로그인
 	login.b1.addActionListener(this);
 	login.b2.addActionListener(this);
 
-	mf.b6.addActionListener(this);
-	mf.b1.addActionListener(this);
+	mf.b1.addActionListener(this);//홈
+	mf.b2.addActionListener(this);//소설
+	mf.b3.addActionListener(this);//소설 검색
+	mf.b4.addActionListener(this);//즐겨찾기
+	mf.b5.addActionListener(this);//커뮤니티
+	mf.b6.addActionListener(this);//실시간 채팅
+	mf.b7.addActionListener(this);//실시간 뉴스
 
   }
 
@@ -145,7 +151,7 @@ public class ClientMainFrame extends JFrame
 
   public void connection(MemberVO vo) {
 	try {
-	  s = new Socket("localhost", 4000);
+	  s = new Socket("localhost", 4321);
 	  // 서버 연결 => s는 서버
 	  // 서버로 전송
 	  out = s.getOutputStream();

@@ -38,5 +38,6 @@ public class Login extends JFrame {
 
 	setBounds(400, 300, 330, 170);
 	setVisible(true);// 화면 출력
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
   }
 }

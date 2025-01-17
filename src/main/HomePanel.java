@@ -24,7 +24,7 @@ public class HomePanel extends JPanel
   int totalpage = 0;
 
   // 데이터베이스 연동 => FoodDAO
-  FoodDAO dao = FoodDAO.newInstance();
+  NovelDAO dao = NovelDAO.newInstance();
 
   public HomePanel(ControlPanel cp) {
 	// JPenal => FlowLayout - - -
@@ -59,16 +59,16 @@ public class HomePanel extends JPanel
   // 이미지 출력
   public void print() {
 	// 총페이지 읽기
-	totalpage = dao.foodTotalPage();
-	List<FoodVO> list = dao.foodListData(curpage);
+	totalpage = dao.novelTotalPage();
+	List<NovelVO> list = dao.novelListData(curpage);
 	for (int i = 0; i < list.size(); i++) {
-	  FoodVO vo = list.get(i);
+	  NovelVO vo = list.get(i);
 	  try {
 		URL url = new URL(vo.getPoster());
 		Image image =
 			ImageChange.getImage(new ImageIcon(url), 200, 180);
 		imgs[i] = new JLabel(new ImageIcon(image));
-		imgs[i].setToolTipText(vo.getName() + "^" + vo.getFno());
+		imgs[i].setToolTipText(vo.getTitle() + "^" + vo.getNo());
 		pan.add(imgs[i]);
 		// 이벤트 등록
 		imgs[i].addMouseListener(this);

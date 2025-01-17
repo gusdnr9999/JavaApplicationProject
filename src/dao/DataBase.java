@@ -1,8 +1,6 @@
 package dao;
 import java.sql.*;
 public class DataBase {
-	private Connection conn;
-	private PreparedStatement ps;
 	
 	private final String URL="jdbc:oracle:thin:@211.238.142.124:1521:XE";
 	
@@ -17,8 +15,9 @@ public class DataBase {
 		}
 	}
 	
-	public void getConnection()
+	public Connection getConnection()
 	{
+		Connection conn = null;
 		try
 		{
 			conn=DriverManager.getConnection(URL,"hr_4","happy");
@@ -26,10 +25,10 @@ public class DataBase {
 		{
 			ex.printStackTrace();
 		}
-		
+		return conn;
 	}
 
-	public void disConnection()
+	public void disConnection(Connection conn, PreparedStatement ps)
 	{
 		try
 		{

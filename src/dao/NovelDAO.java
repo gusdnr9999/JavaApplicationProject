@@ -23,10 +23,10 @@ public class NovelDAO {
 		List<NovelVO> list=new ArrayList<NovelVO>();
 		try
 		{
-			db.getConnection();
+			conn = db.getConnection();
 			String sql="SELECT no,genre,title,poster,author,story,avgstar,serial,iscp,num "
-					+ "FROM (SELECT no,genre,title,poster,author,story,avgstar,serial,iscp,rownum as num"
-					+ "FROM (SELECT /*+ INDEX_ASC(novel novel_no_pk) */ no,genre,title,poster,author,story,avgstar,serial,iscp"
+					+ "FROM (SELECT no,genre,title,poster,author,story,avgstar,serial,iscp,rownum as num "
+					+ "FROM (SELECT /*+ INDEX_ASC(novel novel_no_pk) */ no,genre,title,poster,author,story,avgstar,serial,iscp "
 					+ "FROM novel))"
 					+ "WHERE num BETWEEN ? AND ?";
 			ps=conn.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class NovelDAO {
 		}
 		finally
 		{
-			db.disConnection();
+			db.disConnection(conn, ps);
 		}
 		return list;
 	}
@@ -67,22 +67,22 @@ public class NovelDAO {
 		int count=0;
 		try
 		{
-			db.getConnection();
+			conn = db.getConnection();
 			String sql="SELECT CEIL(COUNT(*)/?) FROM novel";
 			ps=conn.prepareStatement(sql);
 			ps.setDouble(1, NOVELROW);
 			ResultSet rs=ps.executeQuery();
 			rs.next();
 			count=rs.getInt(1);
+			rs.close();
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
 		finally
 		{
-			db.disConnection();
+			db.disConnection(conn, ps);
 		}
-		
 		return count;
 	}
 }

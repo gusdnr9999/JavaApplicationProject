@@ -25,7 +25,7 @@ public class ReviewDAO {
 	List<ReviewVO> list = new ArrayList<ReviewVO>();
 	try {
 
-	  db.getConnection();
+	  conn = db.getConnection();
 	  String sql = "SELECT rno,no,id,star,content,regdate,up,down,profile,num "
 		  + "FROM (SELECT rno,no,id,star,content,regdate,up,down,profile,rownum as num"
 		  + "FROM (SELECT /*+ INDEX_ASC(review review_rno_pk) */ rno,no,id,star,content,regdate,up,down,profile"
@@ -54,7 +54,7 @@ public class ReviewDAO {
 	} catch (Exception ex) {
 	  ex.printStackTrace();
 	} finally {
-	  db.disConnection();
+	  db.disConnection(conn, ps);
 	}
 	return list;
   }
@@ -62,7 +62,7 @@ public class ReviewDAO {
   public int reviewTotalPage() {
 	int count = 0;
 	try {
-	  db.getConnection();
+	  conn = db.getConnection();
 	  String sql = "SELECT CEIL(COUNT(*)/?) FROM review";
 	  ps = conn.prepareStatement(sql);
 	  ps.setDouble(1, REVIEWROW);
@@ -72,7 +72,7 @@ public class ReviewDAO {
 	} catch (Exception ex) {
 	  ex.printStackTrace();
 	} finally {
-	  db.disConnection();
+	  db.disConnection(conn, ps);
 	}
 
 	return count;
